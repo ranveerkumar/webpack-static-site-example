@@ -1,0 +1,20 @@
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: normal;
+  src: url(../fonts/open-sans/OpenSans-ExtraBold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Neuropol';
+  src: url('../fonts/neuropol/Neuropol-Regular.eot');
+  src: url('../fonts/neuropol/Neuropol-Regular.eot?#iefix') format('embedded-opentype'),
+      url('../fonts/neuropol/Neuropol-Regular.woff2') format('woff2'),
+      url('../fonts/neuropol/Neuropol-Regular.woff') format('woff'),
+      url('../fonts/neuropol/Neuropol-Regular.ttf') format('truetype'),
+      url('../fonts/neuropol/Neuropol-Regular.svg#Neuropol-Regular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
