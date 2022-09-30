@@ -1,87 +1,53 @@
+const miniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
-  entry: './src/js/app.js',
-  mode: 'development',
+  entry: './src/js/main.js',
+  plugins: [new miniCssExtractPlugin()],
   output: {
-	path: `${__dirname}/dist`,
-	filename: 'bundle.js'
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist')
   },
   devServer: {
     static: path.resolve(__dirname, 'dist'),
+	open: true,
     port: 8080,
     hot: true
   },
-  plugins: [new MiniCssExtractPlugin()],
   module: {
-	rules: [
-        {
-            test: /\.js$/,
-            exclude: /(node_modules|bower_components)/,
-            use: {
-                loader: 'babel-loader',
-                options: {
-                    presets: ['@babel/preset-env'],
-                },
-            },
-        },
+    rules: [
 		{
-			test: /\.css$/,
-			use: [
-			MiniCssExtractPlugin.loader,
-			'css-loader',
-			],
-		},
-		{
-			test: /\.(svg|gif|png|eot|woff|ttf)$/,
-			use: [
-			'url-loader',
-			],
-		},
-		{
-			mimetype: 'image/svg+xml',
-			scheme: 'data',
-			type: 'asset/resource',
-			generator: {
-				filename: 'icons/[hash].svg'
-			}
-		},
-		{
-			test: /\.(scss)$/,
-			use: [
-				{
-				loader: 'style-loader'
-				},
-				{
-				loader: 'css-loader'
-				},
-				{
-				loader: 'postcss-loader',
-				options: {
-					postcssOptions: {
-					plugins: () => [
-						require('autoprefixer')
-					]
-					}
-				}
-				},
-				{
-					loader: miniCssExtractPlugin.loader
-				}
-			]
+		mimetype: 'image/svg+xml',
+		scheme: 'data',
+		type: 'asset/resource',
+		generator: {
+			filename: 'icons/[hash].svg'
 		}
-	],
-  },
-  optimization: {
-	minimize: true,
-	minimizer: [
-	  new TerserPlugin({
-		extractComments: false,
-	  }),
-	  new OptimizeCssAssetsPlugin(),
-	],
-  },
-};
+	  },
+      {
+        test: /\.(scss)$/,
+        use: [
+          {
+            loader: miniCssExtractPlugin.loader
+          },
+          {
+            loader: 'css-loader'
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: () => [
+                  require('autoprefixer')
+                ]
+              }
+            }
+          },
+		  {
+            loader: 'sass-loader'
+          }
+        ]
+      }
+    ]
+  }
+}

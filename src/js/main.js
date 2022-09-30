@@ -1,9 +1,7 @@
-$(function(){
-  var $readMoreLink = $(".read-more");
+// Import our custom CSS
+import '../scss/styles.scss'
 
-  $readMoreLink.on("click", function(e){
-    e.preventDefault();
-    $(this).parent().next("div").show();
-    $(this).remove();
-  });
-});
+// Import all of Bootstrap's JS
+import * as bootstrap from 'bootstrap'
+// jQuery
+// window.$ = require('jquery');
